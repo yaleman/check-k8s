@@ -1,4 +1,4 @@
-// use std::collections::HashMap;
+//! Nagios-style check for Kubernetes deployments
 
 use check_k8s::{cli::CliOpt, logging::configure_logging};
 use clap::Parser;
@@ -23,6 +23,10 @@ struct DeploymentCliOpts {
 async fn main() -> anyhow::Result<()> {
     let opts = DeploymentCliOpts::parse();
     configure_logging(&opts.commonopts)?;
+
+    if let Some(config) = opts.commonopts.kubeconfig {
+        std::env::set_var("KUBECONFIG", config);
+    }
 
     let client = Client::try_default().await?;
 
