@@ -42,7 +42,7 @@ jobs:
       - name: Install build dependencies
         run: |
           apt-get update
-          apt-get install -y curl build-essential make
+          apt-get install -y curl build-essential make jq lsb-release git
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Build package

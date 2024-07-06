@@ -87,7 +87,6 @@ clean:
 .PHONY: package
 package: ## Build package
 package: build/release
-	apt-get update && apt-get -y install jq lsb-release
 	cd package && ./make.sh \
 		--os $(shell lsb_release -s -i) \
 		--arch $(shell dpkg --print-architecture) \
