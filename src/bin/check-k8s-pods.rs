@@ -1,3 +1,5 @@
+//! Nagios-style check for Kubernetes pods
+
 use std::collections::HashMap;
 
 use check_k8s::{calculate_bad, cli::CliOpt, logging::configure_logging};
@@ -16,6 +18,10 @@ const OK_PHASES: [&str; 2] = ["Running", "Succeeded"];
 async fn main() -> anyhow::Result<()> {
     let opts = CliOpt::parse();
     configure_logging(&opts)?;
+
+    if let Some(config) = opts.kubeconfig {
+        std::env::set_var("KUBECONFIG", config);
+    }
 
     let client = Client::try_default().await?;
 

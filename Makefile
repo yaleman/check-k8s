@@ -18,6 +18,7 @@ test:
 precommit: ## all the usual test things
 precommit: test codespell doc
 	cargo clippy --all-targets --all-features -- -D warnings
+	cargo audit
 
 .PHONY: codespell
 codespell: ## spell-check things.
