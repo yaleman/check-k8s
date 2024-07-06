@@ -18,3 +18,8 @@ tokio = { version = "1.38.0", features = ["rt-multi-thread", "macros"] }
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
 tracing = { version = "0.1.40", features = ["log"] }
 clap = { version = "4.5.8", features = ["derive"] }
+
+[profile.release]
+lto = "thin"
+# because sccache is nice
+incremental = false
