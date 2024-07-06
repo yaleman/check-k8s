@@ -8,5 +8,6 @@ pub struct CliOpt {
     pub debug: bool,
 
     #[clap(short, long)]
+    /// Filter by namespace
     pub namespace: Option<String>,
 }
