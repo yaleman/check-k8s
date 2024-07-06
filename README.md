@@ -1,4 +1,4 @@
-# nagios-k8s
+# check-k8s
 
 Kubernetes check things.
 

@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use nagios_k8s::calculate_bad;
+use check_k8s::calculate_bad;
 
 #[test]
 fn test_calculate_bad() {
@@ -17,9 +17,9 @@ fn test_calculate_bad() {
 #[test]
 fn test_log_setup_debug() {
     assert!(
-        nagios_k8s::logging::configure_logging(&nagios_k8s::cli::CliOpt {
+        check_k8s::logging::configure_logging(&check_k8s::cli::CliOpt {
             debug: true,
-            ..nagios_k8s::cli::CliOpt::default()
+            ..check_k8s::cli::CliOpt::default()
         })
         .is_ok()
     );

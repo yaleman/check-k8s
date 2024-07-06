@@ -229,6 +229,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
+name = "check-k8s"
+version = "0.0.1"
+dependencies = [
+ "anyhow",
+ "clap",
+ "k8s-openapi",
+ "kube",
+ "serde_json",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
 name = "chrono"
 version = "0.4.38"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -951,20 +965,6 @@ dependencies = [
  "libc",
  "wasi",
  "windows-sys 0.48.0",
-]
-
-[[package]]
-name = "nagios-k8s"
-version = "0.0.1"
-dependencies = [
- "anyhow",
- "clap",
- "k8s-openapi",
- "kube",
- "serde_json",
- "tokio",
- "tracing",
- "tracing-subscriber",
 ]
 
 [[package]]

@@ -1,6 +1,6 @@
 GIT_COMMIT := $(shell git rev-parse HEAD)
-IMAGE_BASE ?= nagios-k8s
-IMAGE_EXT_VERSION ?= $(shell cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | select(.name == "nagios_k8s")  | .version')
+IMAGE_BASE ?= check-k8s
+IMAGE_EXT_VERSION ?= $(shell cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | select(.name == "check_k8s")  | .version')
 IMAGE_ARCH ?= "linux/amd64,linux/arm64"
 MARKDOWN_FORMAT_ARGS ?= --options-line-width=100
 

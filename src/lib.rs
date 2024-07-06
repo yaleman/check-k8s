@@ -1,4 +1,4 @@
-//! Random checks for things in Nagios. Mostly implemented in the `bins` directory.
+//! Random checks for things in Kubernetes. Mostly implemented in the `bins` directory.
 
 use std::collections::HashMap;
 

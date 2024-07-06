@@ -1,12 +1,12 @@
 use std::collections::HashMap;
 
+use check_k8s::{calculate_bad, cli::CliOpt, logging::configure_logging};
 use clap::Parser;
 use k8s_openapi::api::core::v1::Pod;
 use kube::{
     api::{Api, ListParams},
     Client,
 };
-use nagios_k8s::{calculate_bad, cli::CliOpt, logging::configure_logging};
 use tracing::{debug, info};
 
 // Valid states: <https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase>
