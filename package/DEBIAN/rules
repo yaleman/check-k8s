@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+%:
+	dh $@ --builddirectory=./target/
+
+clean:
+	cargo clean
+
+build:
+	cargo build --release --bins
+
+
+override_dh_installdeb:
+	dh_installdeb
+
+

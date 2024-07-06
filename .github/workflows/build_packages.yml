@@ -1,0 +1,85 @@
+---
+name: "Build Packages"
+
+"on":
+  push:
+  pull_request:
+
+env:
+  SCCACHE_GHA_ENABLED: "true"
+  RUSTC_WRAPPER: "sccache"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build-deb-package:
+    name: Build packages
+    strategy:
+      matrix:
+        image:
+          - name: ubuntu
+            version: 20.04
+          - name: ubuntu
+            version: 22.04
+          - name: debian
+            version: 12
+          - name: debian
+            version: 11
+      fail-fast: false
+    runs-on: ubuntu-latest
+    container:
+      image: "${{ matrix.image.name }}:${{ matrix.image.version }}"
+      env:
+        DEBIAN_FRONTEND: noninteractive
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup sccache
+        uses: mozilla-actions/sccache-action@v0.0.5
+        with:
+          version: "v0.4.2"
+      - name: Install build dependencies
+        run: |
+          apt-get update
+          apt-get install -y curl build-essential make
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: armv7-unknown-linux-gnueabihf
+      - name: Build package
+        run: |
+          make build_requirements
+          make package
+      - name: Upload debs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ matrix.image.name }}${{ matrix.image.version }}"
+          path: |
+            *.deb
+  upload-to-releases:
+    permissions:
+      # https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
+      contents: write # allows the action to create a release
+
+    name: Upload to releases
+    needs: build-deb-package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download previously built debs
+        uses: actions/download-artifact@v4
+        with:
+          path: debs
+          merge-multiple: true
+      - name: List packages
+        run: |
+          find $(pwd) -name '*.deb'
+      - name: Create GitHub Release
+        # https://github.com/softprops/action-gh-release/tree/v2
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            *.deb
+          fail_on_unmatched_files: true
+          make_latest: true
+        if: ${{ github.ref == 'refs/heads/main' && github.repository == 'yaelman/check-k8s' }}

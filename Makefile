@@ -3,6 +3,7 @@ IMAGE_BASE ?= check-k8s
 IMAGE_EXT_VERSION ?= $(shell cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | select(.name == "check_k8s")  | .version')
 IMAGE_ARCH ?= "linux/amd64,linux/arm64"
 MARKDOWN_FORMAT_ARGS ?= --options-line-width=100
+VER := $(shell cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | select(.name == "check-k8s")  | .version')
 
 .DEFAULT: help
 .PHONY: help
@@ -72,3 +73,21 @@ coverage:
 		--ignore "target/*" \
 		-o target/coverage/html
 	echo "Coverage report is in ./target/coverage/html/index.html"
+
+.PHONY: build/release
+build/release: ## Build in release mode
+build/release:
+	cargo build --release
+
+.PHONY: clean
+clean: ## Cargo clean
+clean:
+	cargo clean
+
+.PHONY: package
+package: ## Build package
+package: build/release
+	cd package && ./make.sh \
+		--os $(shell lsb_release -s -i) \
+		--arch $(PACKAGE_ARCH) \
+		--output $(shell pwd) --ver ${VER}

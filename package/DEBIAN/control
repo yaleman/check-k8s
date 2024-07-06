@@ -1,0 +1,9 @@
+Source: check-k8s
+Maintainer: James Hodgkinson <james@terminaloutcomes.com>
+Build-Depends: debhelper (>= 8.0.0)
+Version:
+Section: utils
+Package: check-k8s
+Priority: extra
+Architecture: armhf
+Description: Kubernetes checks
