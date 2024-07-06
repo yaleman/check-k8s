@@ -1,3 +1,5 @@
+//! Where logging's configured
+
 use tracing::*;
 use tracing_subscriber::{fmt::format, EnvFilter};
 
@@ -13,13 +15,9 @@ fn output_formatter() -> tracing_subscriber::fmt::format::Format<format::Compact
         .with_target(false) // don't include targets
 }
 
+/// Configure logging based on the CLI options
 pub fn configure_logging(opts: &CliOpt) -> anyhow::Result<()> {
-    let log_level = if opts.debug {
-        "debug"
-        // tracing_subscriber::fmt().with_max_level(Level::DEBUG)
-    } else {
-        "info"
-    };
+    let log_level = if opts.debug { "debug" } else { "info" };
     tracing_subscriber::fmt()
         .with_max_level(Level::ERROR)
         .event_format(output_formatter())

@@ -15,16 +15,17 @@ test:
 
 .PHONY: precommit
 precommit: ## all the usual test things
-precommit: test codespell
+precommit: test codespell doc
+	cargo clippy --all-targets --all-features -- -D warnings
 
 .PHONY: codespell
 codespell: ## spell-check things.
 codespell:
 	codespell -c \
-	-D .codespell_dictionary \
-	--ignore-words .codespell_ignore \
-	--skip='./target, \
-	--skip='./docs/*,./.git'
+		-D .codespell_dictionary \
+		--ignore-words .codespell_ignore \
+		--skip='./target' \
+		--skip='./docs/*,./.git'
 
 .PHONY: doc
 doc: ## Build the Rust documentation locally

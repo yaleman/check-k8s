@@ -1,3 +1,5 @@
+//! CLI parsing things
+
 use clap::Parser;
 
 #[derive(Parser, Default)]

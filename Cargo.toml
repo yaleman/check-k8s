@@ -1,7 +1,11 @@
 [package]
 name = "nagios-k8s"
-version = "0.1.0"
+version = "0.0.1"
 edition = "2021"
+license = "MPL2.0"
+homepage = "https://github.com/yaleman/nagios-k8s"
+repository = "https://github.com/yaleman/nagios-k8s"
+
 
 [dependencies]
 anyhow = "1.0.86"
