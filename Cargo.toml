@@ -14,7 +14,7 @@ kube = { version = "0.93.1", features = ["runtime"] }
 k8s-openapi = { version = "0.22.0", features = ["latest"] }
 
 serde_json = "1.0.125"
-tokio = { version = "1.39.2", features = ["rt-multi-thread", "macros"] }
+tokio = { version = "1.39.3", features = ["rt-multi-thread", "macros"] }
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
 tracing = { version = "0.1.40", features = ["log"] }
 clap = { version = "4.5.16", features = ["derive"] }
