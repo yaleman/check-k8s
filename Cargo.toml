@@ -17,7 +17,7 @@ serde_json = "1.0.142"
 tokio = { version = "1.47.1", features = ["rt-multi-thread", "macros"] }
 tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
 tracing = { version = "0.1.41", features = ["log"] }
-clap = { version = "4.5.42", features = ["derive"] }
+clap = { version = "4.5.43", features = ["derive"] }
 
 [profile.release]
 lto = "thin"
