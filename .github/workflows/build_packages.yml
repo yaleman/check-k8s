@@ -47,7 +47,7 @@ jobs:
         run: |
           make package
       - name: Upload debs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: "${{ matrix.image.name }}${{ matrix.image.version }}"
           path: |
@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download previously built debs
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           path: debs
           merge-multiple: true
