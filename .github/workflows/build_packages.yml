@@ -47,7 +47,7 @@ jobs:
         run: |
           make package
       - name: Upload debs
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: "${{ matrix.image.name }}${{ matrix.image.version }}"
           path: |
