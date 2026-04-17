@@ -71,7 +71,7 @@ jobs:
           find $(pwd) -name '*.deb'
       - name: Create GitHub Release
         # https://github.com/softprops/action-gh-release/tree/v2
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: |
             *.deb
